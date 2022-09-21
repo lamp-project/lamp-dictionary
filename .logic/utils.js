@@ -12,7 +12,11 @@ export const DIST_DIR = join(process.cwd(), '../');
 export function exportTSV(filename, data) {
   writeFileSync(
     join(DIST_DIR, `${filename}.tsv`),
-    data.map((item) => item.join('\t')).join('\n'),
+    data
+      .map((item) =>
+        item.map((cell) => cell.toString().replace(/\t/g, ' ')).join('\t')
+      )
+      .join('\n'),
     { encoding: 'utf-8' }
   );
 }

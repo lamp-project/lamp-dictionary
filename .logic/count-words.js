@@ -8,7 +8,6 @@ import { getWords, tokenise, TokensCounter } from '@lamp-project/npl-utils';
 import { exportTSV } from './utils.js';
 
 const SOURCE_EBOOKS_DIR = join(process.cwd(), '../../epub-sources');
-const DIST_DIR = join(process.cwd(), '../');
 
 const wordsCount = new TokensCounter();
 
