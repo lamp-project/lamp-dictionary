@@ -5,7 +5,7 @@ import JSZip from 'jszip';
 import { readFileSync } from 'fs';
 import { JSDomHTML } from '@lamp-project/html-utils/dist/JSDomHTML.js';
 import { getWords, tokenise, TokensCounter } from '@lamp-project/npl-utils';
-import { exportInTSV } from './utils.js';
+import { exportTSV } from './utils.js';
 
 const SOURCE_EBOOKS_DIR = join(process.cwd(), '../../epub-sources');
 const DIST_DIR = join(process.cwd(), '../');
@@ -45,7 +45,7 @@ async function main() {
     console.timeEnd(path);
   }
   const report = wordsCount.sort();
-  exportInTSV('words-frequency', report);
+  exportTSV('words-frequency', report);
 }
 
 console.time('executed');

@@ -1,26 +1,16 @@
 // @ts-check
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import _ from 'lodash';
-import { DIST_DIR, exportInTSV } from './utils.js';
+import { exportTSV, importTSV } from './utils.js';
 import { WordNet } from './wordnet.js';
 import { TokensCounter } from '@lamp-project/npl-utils';
 
 const wordsCount = new TokensCounter();
 
 async function main() {
-  const existingWords = readFileSync(
-    join(DIST_DIR, 'english-words-frequency.tsv'),
-    { encoding: 'utf-8' }
-  )
-    .split('\n')
-    .map((line) => line.split('\t'))
-    .map(([word]) => word.trim());
-  const wordsFrequency = readFileSync(join(DIST_DIR, 'words-frequency.tsv'), {
-    encoding: 'utf-8',
-  })
-    .split('\n')
-    .map((line) => line.split('\t'));
+  const existingWords = importTSV('english-words-frequency').map(
+    ([word]) => word
+  );
+  const wordsFrequency = importTSV('words-frequency');
   let counter = 0;
   const chuncks = _.chunk(wordsFrequency, 1000);
 
@@ -43,7 +33,7 @@ async function main() {
   }
 
   const report = wordsCount.sort();
-  exportInTSV('english-words-frequency', report);
+  exportTSV('english-words-frequency', report);
 }
 
 console.time('executed');
