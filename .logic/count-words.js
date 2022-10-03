@@ -4,7 +4,7 @@ import { join } from 'path';
 import JSZip from 'jszip';
 import { readFileSync } from 'fs';
 import { JSDomHTML } from '@lamp-project/html-utils/dist/JSDomHTML.js';
-import { getWords, tokenise, TokensCounter } from '@lamp-project/npl-utils';
+import { getWords, tokenise, TokensCounter } from '@lamp-project/nlp-utils';
 import { exportTSV } from './utils.js';
 
 const SOURCE_EBOOKS_DIR = join(process.cwd(), '../../epub-sources');

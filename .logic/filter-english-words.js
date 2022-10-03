@@ -2,15 +2,15 @@
 import _ from 'lodash';
 import { exportTSV, importTSV } from './utils.js';
 import { WordNet } from './wordnet.js';
-import { TokensCounter } from '@lamp-project/npl-utils';
+import { TokensCounter } from '@lamp-project/nlp-utils';
 
 const wordsCount = new TokensCounter();
 
 async function main() {
-  const existingWords = importTSV('english-words-frequency').map(
+  const existingWords = importTSV('../english-words-frequency.tsv').map(
     ([word]) => word
   );
-  const wordsFrequency = importTSV('words-frequency');
+  const wordsFrequency = importTSV('../words-frequency.tsv');
   let counter = 0;
   const chuncks = _.chunk(wordsFrequency, 1000);
 

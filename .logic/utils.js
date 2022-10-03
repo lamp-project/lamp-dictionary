@@ -7,7 +7,7 @@ export const DIST_DIR = join(process.cwd(), '../');
 /**
  *
  * @param {string} filename
- * @param {(string | number)[][]} data
+ * @param {any[][]} data
  */
 export function exportTSV(filename, data) {
   writeFileSync(
@@ -20,10 +20,16 @@ export function exportTSV(filename, data) {
     { encoding: 'utf-8' }
   );
 }
-export function importTSV(filename) {
-  return readFileSync(join(DIST_DIR, `${filename}.tsv`), {
+/**
+ *
+ * @param {string} path relative path
+ * @returns {string[][]}
+ */
+export function importTSV(path) {
+  return readFileSync(join(process.cwd(),path), {
     encoding: 'utf-8',
   })
+    .trim()
     .split('\n')
     .map((line) => line.split('\t').map((item) => item.trim()));
 }
